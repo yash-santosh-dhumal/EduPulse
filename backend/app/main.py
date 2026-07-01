@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from app.api.routes.health import router as health_router
-from app.core.config import get_settings
+from .api.routes.health import router as health_router
+from .core.config import get_settings
 
 
 settings = get_settings()

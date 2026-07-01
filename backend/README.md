@@ -17,5 +17,5 @@ FastAPI backend scaffold for School Sphere.
 4. Start the app with Uvicorn:
 
 ```bash
-uvicorn app.main:app --reload --app-dir backend
+uvicorn backend.app.main:app --reload
 ```
