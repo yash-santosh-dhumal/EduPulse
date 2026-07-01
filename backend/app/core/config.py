@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
     database_url: str = "sqlite:///./school_sphere.db"
     redis_url: str = "redis://localhost:6379/0"
-    jwt_secret_key: str = "change-this-secret"
+    jwt_secret_key: SecretStr
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     cors_origins: list[str] = Field(default_factory=lambda: ["*"])
@@ -21,6 +21,14 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         extra="ignore",
     )
+
+    @field_validator("jwt_secret_key")
+    @classmethod
+    def validate_jwt_secret_key(cls, value: SecretStr) -> SecretStr:
+        secret_value = value.get_secret_value()
+        if len(secret_value) < 32:
+            raise ValueError("JWT_SECRET_KEY must be at least 32 characters long")
+        return value
 
 
 @lru_cache
