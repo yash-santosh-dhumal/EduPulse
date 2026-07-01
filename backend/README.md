@@ -9,6 +9,8 @@ FastAPI backend scaffold for School Sphere.
 - JWT/password security helpers
 - Alembic migration scaffold
 - Initial database schema and demo seed helper
+- Phase 4 auth and user management
+- Phase 5 admin module for classes and settings
 - Health check endpoint
 - API router structure
 - CI-friendly source layout
@@ -49,3 +51,15 @@ After seeding, you can sign in with:
 - `POST /api/v1/users`
 - `PUT /api/v1/users/{user_id}`
 - `DELETE /api/v1/users/{user_id}`
+
+## Admin endpoints
+
+- `GET /api/v1/admin/dashboard`
+- `GET /api/v1/admin/classes`
+- `POST /api/v1/admin/classes`
+- `PUT /api/v1/admin/classes/{class_id}`
+- `DELETE /api/v1/admin/classes/{class_id}`
+- `POST /api/v1/admin/classes/{class_id}/assign-teacher`
+- `POST /api/v1/admin/classes/{class_id}/assign-student`
+- `GET /api/v1/admin/settings`
+- `PUT /api/v1/admin/settings/{key}`
