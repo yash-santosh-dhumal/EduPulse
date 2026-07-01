@@ -6,7 +6,7 @@ This file turns the SRS into a step-by-step implementation task list.
 
 1. Create the repo structure for `backend`, `mobile`, and shared docs.
 2. Initialize the FastAPI backend project.
-3. Initialize the Flutter mobile app.
+3. Initialize the React Native + Expo mobile app.
 4. Set up environment configuration for local, staging, and production.
 5. Configure Git, formatting, linting, and basic CI checks.
 
@@ -80,7 +80,7 @@ This file turns the SRS into a step-by-step implementation task list.
 
 ## Phase 10: Mobile App
 
-1. Set up Flutter app navigation and theme.
+1. Set up Expo app navigation and theme.
 2. Build authentication screens.
 3. Build student dashboard screens.
 4. Build teacher dashboard screens.

@@ -1,12 +1,22 @@
-# Mobile
+# School Sphere Mobile
 
-Flutter is not installed on this machine yet, so the mobile app cannot be fully initialized here.
+React Native app scaffolded with Expo for School Sphere.
 
-## Planned Flutter setup
+## What is included
 
-- Flutter app shell
-- Authentication screens
-- Role-based dashboards
-- API integration
+- Expo TypeScript setup
+- Cross-platform mobile foundation
+- Production-friendly project structure
 
-When Flutter is available, initialize the app in this folder and connect it to the backend API.
+## Run locally
+
+1. Open this folder in a terminal.
+2. Install dependencies if needed with `npm install`.
+3. Start the app with `npm start`.
+
+## Next mobile steps
+
+- Add authentication screens
+- Add role-based dashboards
+- Connect the app to the FastAPI backend
+- Add shared navigation and reusable UI components

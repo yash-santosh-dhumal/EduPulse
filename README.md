@@ -32,7 +32,7 @@ The platform digitizes core school workflows, including:
 
 | Layer | Technology |
 | --- | --- |
-| Mobile App | Flutter |
+| Mobile App | React Native + Expo |
 | Language | Dart |
 | Backend | FastAPI |
 | Backend Language | Python |
@@ -160,7 +160,7 @@ Administrators can:
 
 The system follows a client-server architecture:
 
-- Flutter mobile app communicates with the backend through REST APIs
+- React Native + Expo mobile app communicates with the backend through REST APIs
 - FastAPI serves as the backend API layer
 - Redis supports caching and background job coordination
 - Celery processes asynchronous tasks
@@ -282,7 +282,7 @@ The system follows a client-server architecture:
 
 ## Deployment Architecture
 
-- Flutter App
+- React Native + Expo App
 - AWS EC2
 - FastAPI
 - Redis
@@ -316,5 +316,5 @@ The system follows a client-server architecture:
 - Scalable architecture built with FastAPI, Redis caching, and Celery workers
 - Secure JWT-based authentication with role-based access control
 - Optimized performance through caching and asynchronous processing
-- Cross-platform Flutter app for Android and iOS
+- Cross-platform React Native + Expo app for Android and iOS
 - Production-ready AWS deployment with logging and modular design
