@@ -22,7 +22,7 @@ from ..models import (
 
 
 def seed_demo_data(session: Session) -> None:
-    admin = session.query(User).filter(User.email == "admin@schoolsphere.local").one_or_none()
+    admin = session.query(User).filter(User.email == "admin@example.com").one_or_none()
     if admin is not None:
         return
 
@@ -31,19 +31,19 @@ def seed_demo_data(session: Session) -> None:
 
     admin_user = User(
         name="System Admin",
-        email="admin@schoolsphere.local",
+        email="admin@example.com",
         password_hash=hash_password("Admin@12345"),
         role=UserRole.ADMIN,
     )
     teacher_user = User(
         name="Teacher One",
-        email="teacher@schoolsphere.local",
+        email="teacher@example.com",
         password_hash=hash_password("Teacher@12345"),
         role=UserRole.TEACHER,
     )
     student_user = User(
         name="Student One",
-        email="student@schoolsphere.local",
+        email="student@example.com",
         password_hash=hash_password("Student@12345"),
         role=UserRole.STUDENT,
     )

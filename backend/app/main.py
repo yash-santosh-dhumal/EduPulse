@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .api.routes.auth import router as auth_router
+from .api.routes.users import router as users_router
 from .api.routes.health import router as health_router
 from .core.config import get_settings
 from .core.exceptions import register_exception_handlers
@@ -27,6 +29,8 @@ app.add_middleware(
 register_exception_handlers(app)
 
 app.include_router(health_router, prefix=settings.api_v1_prefix)
+app.include_router(auth_router, prefix=settings.api_v1_prefix)
+app.include_router(users_router, prefix=settings.api_v1_prefix)
 
 
 @app.get("/")

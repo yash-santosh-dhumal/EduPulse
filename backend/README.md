@@ -30,3 +30,22 @@ alembic upgrade head
 ```bash
 uvicorn backend.app.main:app --reload
 ```
+
+## Demo accounts
+
+After seeding, you can sign in with:
+
+- Admin: `admin@example.com` / `Admin@12345`
+- Teacher: `teacher@example.com` / `Teacher@12345`
+- Student: `student@example.com` / `Student@12345`
+
+## Auth endpoints
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/refresh`
+- `POST /api/v1/auth/logout`
+- `GET /api/v1/auth/me`
+- `GET /api/v1/users`
+- `POST /api/v1/users`
+- `PUT /api/v1/users/{user_id}`
+- `DELETE /api/v1/users/{user_id}`
