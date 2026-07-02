@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from datetime import date, datetime, time
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+import bleach
 
 from ..models import AttendanceStatus
 
@@ -85,6 +86,13 @@ class AssignmentCreate(BaseModel):
     deadline: datetime
     class_id: int
     attachment_url: str | None = Field(default=None, max_length=500)
+
+    @field_validator('title', 'description')
+    @classmethod
+    def sanitize_html(cls, v: str | None) -> str | None:
+        if v is None:
+            return v
+        return bleach.clean(v, strip=True, tags=[])
 
 
 class AssignmentUpdate(BaseModel):
@@ -180,6 +188,13 @@ class NoticeCreate(BaseModel):
     title: str = Field(min_length=1, max_length=200)
     body: str = Field(min_length=1)
     scheduled_at: datetime | None = None
+
+    @field_validator('title', 'body')
+    @classmethod
+    def sanitize_html(cls, v: str | None) -> str | None:
+        if v is None:
+            return v
+        return bleach.clean(v, strip=True, tags=[])
 
 
 class NoticeUpdate(BaseModel):

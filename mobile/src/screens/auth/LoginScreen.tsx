@@ -22,17 +22,17 @@ export const LoginScreen = () => {
     setError('');
     
     try {
-      // Need URLSearchParams for OAuth2 form data
-      const formData = new URLSearchParams();
-      formData.append('username', email);
-      formData.append('password', password);
+      const payload = {
+        email: email,
+        password: password,
+      };
       
       const response = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: formData.toString(),
+        body: JSON.stringify(payload),
       });
       
       if (!response.ok) {

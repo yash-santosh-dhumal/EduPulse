@@ -6,15 +6,26 @@ const DEV_URL = Platform.OS === 'android' ? 'http://10.0.2.2:8000' : 'http://loc
 export const API_BASE = process.env.EXPO_PUBLIC_API_URL || DEV_URL;
 
 export const setAuthToken = async (token: string) => {
-  await SecureStore.setItemAsync('auth_token', token);
+  if (Platform.OS === 'web') {
+    localStorage.setItem('auth_token', token);
+  } else {
+    await SecureStore.setItemAsync('auth_token', token);
+  }
 };
 
 export const getAuthToken = async (): Promise<string | null> => {
+  if (Platform.OS === 'web') {
+    return localStorage.getItem('auth_token');
+  }
   return await SecureStore.getItemAsync('auth_token');
 };
 
 export const clearAuthToken = async () => {
-  await SecureStore.deleteItemAsync('auth_token');
+  if (Platform.OS === 'web') {
+    localStorage.removeItem('auth_token');
+  } else {
+    await SecureStore.deleteItemAsync('auth_token');
+  }
 };
 
 export class ApiError extends Error {

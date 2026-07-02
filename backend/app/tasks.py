@@ -4,7 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from .core.celery_app import celery_app
 from .db.session import SessionLocal
-from .models import Notification, NotificationType
+from .models import Notification, NotificationType, User
+from .admin_models import AuditLog
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +45,18 @@ def send_notification(self, user_id: int, title: str, message: str, notification
     except Exception as e:
         logger.error(f"Unexpected error while sending notification: {e}")
         db.rollback()
+        
+        # Check if max retries exceeded or will exceed
+        if self.request.retries >= self.max_retries:
+            audit = AuditLog(
+                user_id=user_id,
+                action="NOTIFICATION_FAILED",
+                endpoint="celery:send_notification",
+                details=f"Failed to send {notification_type} notification to user {user_id} after {self.max_retries} retries. Error: {str(e)}"
+            )
+            db.add(audit)
+            db.commit()
+            
         raise self.retry(exc=e)
     finally:
         db.close()

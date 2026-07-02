@@ -12,6 +12,8 @@ from .api.routes.health import router as health_router
 from .core.config import get_settings
 from .core.exceptions import register_exception_handlers
 from .core.logging import configure_logging
+from .core.rate_limit import limiter
+from fastapi import Request
 
 
 settings = get_settings()
@@ -22,6 +24,16 @@ app = FastAPI(
     debug=settings.debug,
     version="0.1.0",
 )
+
+app.state.limiter = limiter
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
 
 app.add_middleware(
     CORSMiddleware,
