@@ -15,7 +15,7 @@ services:
         max-file: "3"
 
   api:
-    entrypoint: ["/bin/bash", "/app/scripts/entrypoint.sh"]
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
     environment:
       - APP_ENV=production
       - DEBUG=false

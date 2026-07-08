@@ -29,7 +29,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: edupulse-api
-    entrypoint: ["/bin/bash", "/app/scripts/entrypoint.sh"]
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
     env_file:
       - .env
     environment:
@@ -37,7 +37,6 @@ services:
       - REDIS_URL=redis://redis:6379/0
     volumes:
       - ./backend:/app
-      - ./scripts/entrypoint.sh:/app/scripts/entrypoint.sh:ro
     depends_on:
       db:
         condition: service_healthy

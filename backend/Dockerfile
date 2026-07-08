@@ -36,8 +36,8 @@ WORKDIR /app
 COPY . .
 
 # Copy entrypoint script and make executable
-COPY ../scripts/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh 2>/dev/null || true
+COPY scripts/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Own the app directory
 RUN chown -R edupulse:edupulse /app
